@@ -12,7 +12,7 @@ variable "subnet_cidrs" {
 }
 
 variable "app_name" {
-  default = "hello-world-app"
+  default = "helloworld_nodejs"
 }
 
 variable "cluster_name" {
