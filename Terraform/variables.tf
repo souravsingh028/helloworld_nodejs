@@ -11,7 +11,7 @@ variable "subnet_cidrs" {
   default = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
-variable "helloworld_nodejs" {
+variable "app_name" {
   default = "helloworld_nodejs"
 }
 
@@ -25,9 +25,4 @@ variable "ecs_task_execution_role_arn" {
   default     = "your-ecs-task-execution-role-arn"
 }
 
-variable "helloworld_nodejs" {
-  description = "Name of the Hello World Node.js application"
-  type        = string
-  default     = "hello-world-nodejs"  # Adjust the default value to meet the naming requirements
-}
 
