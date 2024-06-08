@@ -6,7 +6,7 @@ resource "aws_ecs_task_definition" "app" {
   family                   = helloworld_nodejs
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  execution_role_arn       = arn:aws:iam::***:user/kk_labs_user_625407
+  execution_role_arn       = arn:aws:iam::211125734644:user/kk_labs_user_625407
   cpu                      = "256"
   memory                   = "512"
 
