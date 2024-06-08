@@ -24,3 +24,10 @@ variable "ecs_task_execution_role_arn" {
   type        = string
   default     = "your-ecs-task-execution-role-arn"
 }
+
+variable "helloworld_nodejs" {
+  description = "Name of the Hello World Node.js application"
+  type        = string
+  default     = "hello-world-nodejs"  # Adjust the default value to meet the naming requirements
+}
+
