@@ -6,7 +6,7 @@ resource "aws_ecs_task_definition" "app" {
   family                   = var.app_name
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  execution_role_arn       = "arn:aws:iam::211125734644:user/kk_labs_user_625407"
+  execution_role_arn       = "arn:aws:iam::211125734644:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
   cpu                      = "256"
   memory                   = "512"
 
@@ -70,4 +70,23 @@ resource "aws_lb_listener" "app" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.app.arn
   }
+}
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.main.id
+}
+
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+}
+
+resource "aws_route_table_association" "public_subnet" {
+  count          = length(aws_subnet.main)
+  subnet_id      = element(aws_subnet.main[*].id, count.index)
+  route_table_id = aws_route_table.public.id
 }
