@@ -3,7 +3,7 @@ resource "aws_ecr_repository" "app" {
 }
 
 resource "aws_ecs_task_definition" "app" {
-  family                   = helloworld_nodejs
+  family                   = var.helloworld_nodejs
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   execution_role_arn       = arn:aws:iam::211125734644:user/kk_labs_user_625407
@@ -12,7 +12,7 @@ resource "aws_ecs_task_definition" "app" {
 
   container_definitions = jsonencode([
     {
-      name      = helloworld_nodejs
+      name      = var.helloworld_nodejs
       image     = "${aws_ecr_repository.app.repository_url}:latest"
       essential = true
       portMappings = [
@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "app" {
 }
 
 resource "aws_ecs_service" "app" {
-  name            = helloworld_nodejs
+  name            = var.helloworld_nodejs
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.app.arn
   desired_count   = 2
@@ -40,13 +40,13 @@ resource "aws_ecs_service" "app" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.app.arn
-    container_name   = helloworld_nodejs
+    container_name   = var.helloworld_nodejs
     container_port   = 3000
   }
 }
 
 resource "aws_lb" "app" {
-  name               = helloworld_nodejs
+  name               = var.helloworld_nodejs
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.main.id]
@@ -54,7 +54,7 @@ resource "aws_lb" "app" {
 }
 
 resource "aws_lb_target_group" "app" {
-  name     = helloworld_nodejs
+  name     = var.helloworld_nodejs
   port     = 3000
   protocol = "HTTP"
   vpc_id   = aws_vpc.main.id
