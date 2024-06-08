@@ -27,8 +27,8 @@ jobs:
   
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.ECR_REPOSITORY }}/helloworld_nodejs:latest .
-          docker push ${{ secrets.ECR_REPOSITORY }}/helloworld_nodejs:latest
+          docker build -t ${{ secrets.ECR_REPOSITORY }} .
+          docker push ${{ secrets.ECR_REPOSITORY }}
           
 
       - name: Deploy to ECS
