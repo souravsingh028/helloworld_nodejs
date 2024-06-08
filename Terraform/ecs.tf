@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "app" {
-  name = var.app_name
+  name = var.helloworld_nodejs
 }
 
 resource "aws_ecs_task_definition" "app" {
