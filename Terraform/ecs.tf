@@ -6,7 +6,7 @@ resource "aws_ecs_task_definition" "app" {
   family                   = var.app_name
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  execution_role_arn       = "arn:aws:iam::211125734644:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
+  execution_role_arn       = "arn:aws:iam::533267179439:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
   cpu                      = "256"
   memory                   = "512"
 
