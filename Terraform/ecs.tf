@@ -45,20 +45,14 @@ resource "aws_ecs_service" "app" {
   }
 }
 
+
+
 resource "aws_lb" "app" {
   name               = var.app_name
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.main.id]
   subnets            = aws_subnet.main[*].id
-}
-
-resource "aws_lb_target_group" "app" {
-  name     = var.app_name
-  port     = 3000
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.main.id
-  target_type = "ip"
 }
 
 resource "aws_lb_listener" "app" {
@@ -71,6 +65,14 @@ resource "aws_lb_listener" "app" {
     target_group_arn = aws_lb_target_group.app.arn
   }
 }
+resource "aws_lb_target_group" "app" {
+  name     = var.app_name
+  port     = 3000
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.main.id
+  target_type = "ip"
+}
+
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
