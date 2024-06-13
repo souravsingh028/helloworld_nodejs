@@ -30,7 +30,7 @@ jobs:
     - name: Build and push Docker image
       id: build-image
       run: |
-        docker build -t ${{ secrets.ECR_REPOSITORY }}//hello-world-nodejs:latest .
+        docker build -t ${{ secrets.ECR_REPOSITORY }}//hello-world-nodejs:latest /.
         docker push ${{ secrets.ECR_REPOSITORY }}//hello-world-nodejs:latest:latest
       env:
         ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
